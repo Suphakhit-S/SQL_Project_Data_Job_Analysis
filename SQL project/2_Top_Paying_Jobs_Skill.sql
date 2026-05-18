@@ -1,9 +1,9 @@
--- The top 10 paying Data Analyst jobs 
+-- The top 10 paying Data Analyst jobs list
 WITH top_paying_jobs AS (
     SELECT
         job_id,
         job_title,
-        salary_year_avg
+        salary_year_avg,
         name AS company_name
     FROM
         job_postings_fact
@@ -27,9 +27,11 @@ SELECT
     skills
 FROM
     top_paying_jobs
+-- Join skills_job_dim to get the skill of the most paying job
 INNER JOIN
     skills_job_dim ON
         top_paying_jobs.job_id = skills_job_dim.job_id
+-- Join skills_job to get the skill name of the most paying job
 INNER JOIN
     skills_dim ON
         skills_job_dim.skill_id = skills_dim.skill_id
